@@ -1,0 +1,19 @@
+# Never commit local secrets, deployments, or logs
+.env
+.env.*
+*.key
+*.pem
+*.pfx
+*token*
+*.log
+logs/
+node_modules/
+runtime/
+tunnel/
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.bak
+*.backup
+config.local.*
