@@ -29,7 +29,7 @@ This project combines Wolfram's official AgentTools server, the open-source `mcp
                                     |
                             one wolfram.exe
 
-          Mathematica Desktop ─────── separate kernel, if licensed
+          Mathematica Desktop ─────── second licensed kernel (verified: 2 permitted)
 ```
 
 All three MCP clients share the same **Wolfram operating-system process**, as confirmed using `$ProcessID`. **That does not imply they share the same evaluator session or variable definitions.** Wolfram AgentTools' evaluator exposes session handling; different evaluator session IDs can have different contexts and histories. Session continuity depends on passing the appropriate session identifier, not merely on connecting to the same proxy. Cross-client namespace isolation was verified experimentally between ChatGPT and Claude Code (both PID `10028`, but Claude's new session returned no own-value for ChatGPT's probe symbol); restart persistence remains unverified; see [Session state](docs/architecture.md#evaluation-state-versus-process-state) and [session tests](docs/testing.md#evaluator-session-state-tests). The reference implementation does not guarantee serialized FIFO execution of overlapping mutating requests.
