@@ -7,7 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-reference%20implementation-orange)](#project-status)
 
-**Use a single Windows-hosted Wolfram Language kernel from ChatGPT, Codex CLI, and Claude Code through one shared MCP endpoint.** Keep the Mathematica desktop available separately when your license permits another controlling process.
+**Use a single Windows-hosted Wolfram Language kernel from ChatGPT, Codex CLI, and Claude Code through one shared MCP endpoint.** In the original verified installation, the Wolfram license reported **\`$MaxLicenseProcesses = 2\`**: one licensed controlling process was used for the shared MCP backend and the other for Mathematica Desktop. This entitlement is **license-specific**, not guaranteed for other installations.
 
 This project combines Wolfram's official AgentTools server, the open-source `mcp-proxy` multiplexer, and OpenAI's official Secure MCP Tunnel. **No OAuth server, no duplicate Wolfram kernels per client, and no public router port forwarding.**
 
