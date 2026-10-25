@@ -20,6 +20,8 @@ Do not assume that an unqualified assignment such as `x = 42` in one client is v
 
 AgentTools may offer different evaluation methods (including a method that evaluates through a separate local kernel). Any method that spawns another kernel is **outside the single-process requirement**. Verify the evaluator method and process count when changing defaults.
 
+**Directly verified evaluator isolation (2026-10-24):** ChatGPT created two fresh WolframLanguageEvaluator sessions with the same kernel PID `10028`. Session A defined `mcpIsolationProbe20261024 = 424242`, session B returned `OwnValues[mcpIsolationProbe20261024] = {}`, and reusing A's evaluator session ID returned `424242`. Thus isolated own-values and session continuity are established **within ChatGPT**. Cross-client variable tests remain outstanding. See [testing.md](testing.md#evaluator-session-state-tests).
+
 **Restart persistence is unproven in this repository.** Some evaluator session mechanisms may persist metadata or history, but whether definitions are restored after a restart depends on the documented AgentTools version, method and storage configuration. The existing reboot test verified new process startup and client reconnection—not definition persistence.
 
 See [evaluator session tests](testing.md#evaluator-session-state-tests) before promising session isolation or persistence to users.
