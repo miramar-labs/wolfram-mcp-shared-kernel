@@ -30,7 +30,7 @@ See [evaluator session tests](testing.md#evaluator-session-state-tests) before p
 - A client may connect independently; connection count does not determine Wolfram process count.
 - Concurrent evaluations that mutate state require discipline. The reference deployment does not enforce an application-level single-flight queue; do not assume strict FIFO ordering.
 - `mcp-proxy` may not propagate MCP roots, sampling, or elicitation. Confirm if new Wolfram AgentTools workflows rely on them.
-- A separately launched Mathematica Desktop kernel may consume an additional controlling-process license.
+- **License verification on the original installation:** \`$MaxLicenseProcesses = 2\` was observed. We then confirmed one MCP-owned Wolfram process running concurrently with a second process launched by \`WolframNB.exe\`; a desktop notebook successfully evaluated \`2+2\` while the shared MCP backend remained available. This supports the intended allocation of **one licensed controlling process for MCP and one for Desktop** on that machine. License entitlements and permitted usage vary; other users must verify their own license terms and process limits.
 - Exact Windows startup behavior can depend on the scheduled task logon account, access to the user credential, environment variables, and network readiness.
 - System security depends on Windows Firewall and network topology, **not** on MCP authentication headers.
 
