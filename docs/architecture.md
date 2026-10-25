@@ -26,6 +26,8 @@ AgentTools may offer different evaluation methods (including a method that evalu
 
 See [evaluator session tests](testing.md#evaluator-session-state-tests) before promising session isolation or persistence to users.
 
+**Three-client isolation verified (2026-10-24):** ChatGPT evaluator session `gLZFoCfY` set `mcpIsolationProbe20261024 = 424242`; Claude Code fresh session `q6YjKGjB` and Codex fresh session `yuyKZMfK` each evaluated `{$ProcessID, OwnValues[mcpIsolationProbe20261024]}` and returned `{10028, {}}`. All three shared kernel PID `10028`, while own-values in the ChatGPT session were not visible from the other sessions. These results verify logical evaluator namespace isolation, **not** security isolation or persistence across server restarts.
+
 ## Trade-offs
 
 - One kernel means a shared **process**, not necessarily one shared evaluator namespace. Client connections and Wolfram evaluator session IDs are distinct; explicit shared/global side effects still require care.
