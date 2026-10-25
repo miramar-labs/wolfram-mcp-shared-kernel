@@ -17,6 +17,8 @@ Record date, versions, kernel PID, Windows firewall profile, and relevant startu
 
 ## Evaluator session state tests
 
+**Three-client isolation verified (2026-10-24):** ChatGPT evaluator session `gLZFoCfY` set `mcpIsolationProbe20261024 = 424242`; Claude Code fresh session `q6YjKGjB` and Codex fresh session `yuyKZMfK` each evaluated `{$ProcessID, OwnValues[mcpIsolationProbe20261024]}` and returned `{10028, {}}`. All three shared kernel PID `10028`, while own-values in the ChatGPT session were not visible from the other sessions. These results verify logical evaluator namespace isolation, **not** security isolation or persistence across server restarts.
+
 **Verified 2026-10-24 (within ChatGPT):** Two separate Wolfram evaluator sessions used kernel PID `10028`. Session A assigned `mcpIsolationProbe20261024 = 424242` and read it back after reusing its session ID. A fresh session B returned `OwnValues[mcpIsolationProbe20261024] = {}` in context `Sessions`xzVdmrLt``. This confirms **logical own-value isolation between two evaluator sessions in the same process**, plus state continuity across calls when the evaluator session ID is reused. It does **not** yet test isolation across different MCP clients, file/global state, or persistence across restart. Run additional tests with non-conflicting unique names, not production notebooks.
 
 1. **Session A persistence (PASSED within ChatGPT):** From ChatGPT call `WolframLanguageEvaluator` with an assignment such as `mcpSessionProbeA = 424242` using its documented session API. Record any returned evaluator session ID, and in a second call explicitly reuse that ID to evaluate `mcpSessionProbeA`. Expect `424242` **only if** the evaluator method/session retains assignments.
