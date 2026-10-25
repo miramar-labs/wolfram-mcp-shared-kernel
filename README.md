@@ -76,6 +76,10 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\Install-Wolfra
 - Exactly **one MCP-owned** `wolfram.exe` should be a child of `node-wolfram.exe`.
 - In ChatGPT, Codex, and Claude Code, call `WolframLanguageContext` followed by `WolframLanguageEvaluator` on `{$ProcessID,2+2}`. All three should return the **same process ID** and `4`.
 
+### Optional: CUDA smoke test
+
+On an NVIDIA-equipped Windows Wolfram host, you can verify GPU discovery and a real `CUDADot` matrix computation through any MCP client. **CUDA is not required** for the shared MCP architecture. The original installation passed on an NVIDIA GeForce RTX 4060 Laptop GPU (compute capability 8.9, NVIDIA driver 591.44), with GPU and CPU matrix results matching exactly. See [CUDA verification and reproducible test](docs/cuda.md).
+
 ### 4. Status or uninstall
 
 ```powershell
@@ -103,6 +107,7 @@ The reference uses Windows Firewall rules scoped to a trusted host and a dedicat
 - [Architecture and limitations](docs/architecture.md)
 - [Security model](docs/security.md)
 - [Acceptance tests](docs/testing.md)
+- [Optional CUDA verification](docs/cuda.md)
 - [Troubleshooting](docs/troubleshooting.md)
 - [Official references](docs/references.md)
 
