@@ -34,6 +34,8 @@ This project combines Wolfram's official AgentTools server, the open-source `mcp
 
 All three MCP clients share the same **Wolfram operating-system process**, as confirmed using `$ProcessID`. **That does not imply they share the same evaluator session or variable definitions.** Wolfram AgentTools' evaluator exposes session handling; different evaluator session IDs can have different contexts and histories. Session continuity depends on passing the appropriate session identifier, not merely on connecting to the same proxy. Cross-client namespace isolation was verified experimentally between ChatGPT and Claude Code (both PID `10028`, but Claude's new session returned no own-value for ChatGPT's probe symbol); restart persistence remains unverified; see [Session state](docs/architecture.md#evaluation-state-versus-process-state) and [session tests](docs/testing.md#evaluator-session-state-tests). The reference implementation does not guarantee serialized FIFO execution of overlapping mutating requests.
 
+**Three-client isolation verified (2026-10-24):** ChatGPT evaluator session `gLZFoCfY` set `mcpIsolationProbe20261024 = 424242`; Claude Code fresh session `q6YjKGjB` and Codex fresh session `yuyKZMfK` each evaluated `{$ProcessID, OwnValues[mcpIsolationProbe20261024]}` and returned `{10028, {}}`. All three shared kernel PID `10028`, while own-values in the ChatGPT session were not visible from the other sessions. These results verify logical evaluator namespace isolation, **not** security isolation or persistence across server restarts.
+
 ## Quickstart
 
 ### 1. Prerequisites
