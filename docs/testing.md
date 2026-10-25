@@ -29,3 +29,7 @@ Record date, versions, kernel PID, Windows firewall profile, and relevant startu
 6. **Kernel count:** Before and after each evaluation, inspect parent-child processes. Reject any evaluator method that starts a second licensed Wolfram kernel if the single-MCP-kernel limit is required.
 
 Record AgentTools version, evaluator method, whether a session ID was supplied, and the results. Clean up probe definitions through the supported evaluator context. Never assume that MCP `Mcp-Session-Id` equals the Wolfram evaluator session identifier.
+
+## Optional CUDA verification
+
+On hosts with NVIDIA GPUs, perform the documented [CUDALink discovery and matrix-multiplication test](cuda.md). It is **not** required for a successful MCP acceptance test or CPU-only usage. The original Windows RTX 4060 Laptop GPU installation (driver 591.44, compute capability 8.9) returned `CUDAQ[] = True`, one device, and a `CUDADot` result identical to the CPU `Dot` result, with absolute numerical error `0.`. See the linked page for exact expressions, the need for qualified CUDALink symbols inside evaluator session contexts, and limitations of the smoke test.
